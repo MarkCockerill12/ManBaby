@@ -2,7 +2,10 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
+#include <unordered_map>
+#include <vector>
 
 class BabyAssembler {
 public:
@@ -10,5 +13,13 @@ public:
     void assemble(const std::string& inputFilename, const std::string& outputFilename);
 
 private:
-    // Add necessary data members for assembler
+    std::unordered_map<std::string, int> symbolTable;  // Symbol table to store variable names and labels
+    std::vector<std::string> machineCode;              // Vector to store machine code instructions
+
+    // Helper functions
+    void processLine(const std::string& line);
+    void handleInstruction(const std::string& instruction);
+    void handleVariable(const std::string& variable);
+    void handleError(const std::string& error);
 };
+
