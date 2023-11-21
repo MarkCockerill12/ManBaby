@@ -12,8 +12,8 @@ public:
     BabySimulator();
     void loadProgram(const std::string& filename);
     void run();
-    int getLineNumber();
-    int getFunctionNumber();
+    unsigned int getLineNumber();
+    unsigned int getFunctionNumber();
     void getNegation();
     void printMemory();
 

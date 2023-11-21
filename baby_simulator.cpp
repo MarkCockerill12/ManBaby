@@ -84,7 +84,7 @@ void BabySimulator::run() {
     // Print state at each step
 }
 
-int BabySimulator::getLineNumber(){
+unsigned int BabySimulator::getLineNumber(){
     // Line number are bits 0-4, lsb is right most bit
 
     // Get line number
@@ -92,7 +92,7 @@ int BabySimulator::getLineNumber(){
     return line_number;
 }
 
-int BabySimulator::getFunctionNumber(){
+unsigned int BabySimulator::getFunctionNumber(){
     // Function number are bits 13-15, right is left most bit
 
     // Get function number
