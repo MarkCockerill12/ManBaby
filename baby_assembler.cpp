@@ -54,6 +54,8 @@ void BabyAssembler::processLine(const std::string& line) {
 }
 
 void BabyAssembler::handleInstruction(const std::string& instruction) {
+    //UNTESTED but in theory should work
+    
     // Map assembly instructions to machine code for the Manchester Baby's architecture
     std::string machineInstruction;
 
@@ -89,7 +91,7 @@ void BabyAssembler::handleVariable(const std::string& variable) {
 
     //Still working on this, but marks version seems to work better
 
-    
+
     std::string label = variable.substr(0, variable.size() - 1); // Removes the ':'
 
     // Check if the label is already in the symbol table
