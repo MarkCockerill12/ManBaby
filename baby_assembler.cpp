@@ -54,17 +54,52 @@ void BabyAssembler::processLine(const std::string& line) {
 }
 
 void BabyAssembler::handleInstruction(const std::string& instruction) {
-    // Implement logic to convert assembly instructions to machine code
-    //  this is a placeholder rn
-    machineCode.push_back(instruction);
+    // Map assembly instructions to machine code for the Manchester Baby's architecture
+    std::string machineInstruction;
+
+    // See if users instruction matches any from the list of instructions
+    if (instruction == "JMP") {
+        machineInstruction = "0000"; 
+    } else if (instruction == "JRP") {
+        machineInstruction = "0010"; 
+    } else if (instruction == "LDN") {
+        machineInstruction = "0011"; 
+    } else if (instruction == "STO") {
+        machineInstruction = "0100"; 
+    } else if (instruction == "SUB") {
+        machineInstruction = "0101"; 
+    } else if (instruction == "CMP") {
+        machineInstruction = "00110"; 
+    } else if (instruction == "STP") {
+        machineInstruction = "00111"; 
+    } else {
+        handleError("Invalid instruction: " + instruction);
+        return;
+    }
+
+    machineCode.push_back(machineInstruction);
 }
 
+
+
+
+
 void BabyAssembler::handleVariable(const std::string& variable) {
-    // Implement logic to handle labels
-    // this assumes labels are stored with their line numbers.
-    // needs further testing
+
+
+    //Still working on this, but marks version seems to work better
+
+    
     std::string label = variable.substr(0, variable.size() - 1); // Removes the ':'
-    symbolTable[label] = machineCode.size(); // Store the line number corresponding to the label
+
+    // Check if the label is already in the symbol table
+    if (symbolTable.find(label) == symbolTable.end()) {
+        // If not, add it to the symbol table with the current machine code size as the memory address
+        symbolTable[label] = machineCode.size();
+    } else {
+        // If the label is already in the symbol table, it's a redeclaration error
+        handleError("Label redeclaration error: " + label);
+    }
 }
 
 void BabyAssembler::handleError(const std::string& error) {
