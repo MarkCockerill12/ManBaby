@@ -3,7 +3,6 @@
 
 BabySimulator::BabySimulator() {
     // Initialize data members
-    
 }
 
 void BabySimulator::loadProgram(const std::string& filename) {
@@ -25,7 +24,7 @@ void BabySimulator::loadProgram(const std::string& filename) {
     }
     reader.close();
     cout<<""<<endl;
-}   
+}
 
 void BabySimulator::run() {
     // 0000000000000000***0000000000000 <-- Template function number with lsb on right.
@@ -56,11 +55,10 @@ void BabySimulator::run() {
             memory[getLineNumber()] = accumulator;
         }
         else if (getFunctionNumber() == function_codes[4] || PI == function_codes[5]){ //Subtract
-            cout<<"Subtract "<< std::bitset<32>(accumulator) << "from " << std::bitset<32>(memory[getLineNumber()])<<endl;
+            cout<<"Subtract "<< std::bitset<32>(accumulator) << " from " << std::bitset<32>(memory[getLineNumber()])<<endl;
             accumulator = accumulator - memory[getLineNumber()];
-
         }
-        else if (getFunctionNumber() == function_codes[6]){//compare result.
+        else if (getFunctionNumber() == function_codes[6]){ //compare result.
             cout<<"If accumulator negative, skip next instruction"<<endl;
             getNegation();
         }
@@ -69,15 +67,13 @@ void BabySimulator::run() {
             break;
         }
         else{
-            cout<<"Error in loading function instruction"<<endl;
+            cout<<"Error in loading function instruction on line: " << CI <<endl;
         }
         PI = 0;
 
         if (count == 10){
             break;
         }
-
-
         //count++;
     }
 
@@ -102,7 +98,7 @@ unsigned int BabySimulator::getFunctionNumber(){
 
 void BabySimulator::getNegation(){
     if((accumulator & 0b100000000000000000000000000000000) == 0b10000000000000000000000000000000){ //Check if msb is high, as is sign bit sets number -ve if high.
-                CI++;
+        CI++;
     }
 }
 
