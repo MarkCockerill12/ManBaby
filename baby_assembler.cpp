@@ -88,20 +88,17 @@ void BabyAssembler::handleInstruction(const std::string& instruction) {
 
 void BabyAssembler::handleVariable(const std::string& variable) {
 
-
-    //Still working on this, but marks version seems to work better
-
-
     std::string label = variable.substr(0, variable.size() - 1); // Removes the ':'
 
-    // Check if the label is already in the symbol table
+    // Check's if the label is already in the symbol table
     if (symbolTable.find(label) == symbolTable.end()) {
         // If not, add it to the symbol table with the current machine code size as the memory address
         symbolTable[label] = machineCode.size();
     } else {
-        // If the label is already in the symbol table, it's a redeclaration error
+        // If the label is already in the symbol table, it's an error
         handleError("Label redeclaration error: " + label);
     }
+    //What other handling needs to be added for the final version?
 }
 
 void BabyAssembler::handleError(const std::string& error) {
